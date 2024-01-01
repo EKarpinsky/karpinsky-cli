@@ -1,13 +1,13 @@
 import type { NextPage } from 'next';
-import CLIComponent from '../components/CLIComponent/CLIComponent';
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import CliComponent from '../components/CLIComponent/CliComponent';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 const Page: NextPage = () => {
-   return (
-       <ThemeProvider>
-          <CLIComponent/>
-       </ThemeProvider>
-   );
+  return (
+    <ThemeProvider>
+      <CliComponent />
+    </ThemeProvider>
+  );
 };
 
 export default Page;
