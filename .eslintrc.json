@@ -1,3 +1,9 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next", "next/core-web-vitals", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
+  }
 }

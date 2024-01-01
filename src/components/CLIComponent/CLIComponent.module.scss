@@ -1,0 +1,98 @@
+$terminalTextGreen: #00FF41;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: monospace;
+}
+
+.cli {
+  width: 95%;
+  max-width: 800px;
+  background-color: var(--background); // Terminal background
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333333; // Slight border for depth
+  overflow: auto;
+}
+
+.cliHeading {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.line {
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+
+.inputCaretWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: flex-start;
+}
+
+
+@keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}
+
+.fakeCaret {
+  width: 2px;
+  height: 1em;
+  background-color: var(--text);
+  animation: blink 1s step-start infinite;
+  margin-left: 2px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.inputMirror {
+  position: relative;
+  flex-grow: 1;
+  padding: 10px 0;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  display: inline-block;
+  height: 14px;
+}
+
+.input {
+  flex-grow: 1;
+  padding: 10px 0;
+  background-color: transparent;
+  border: none;
+  color: var(--text);
+  caret-color: transparent; // Hide the actual caret
+  font-size: 0.9em;
+  font-family: monospace;
+  display: inline-block;
+  width: auto;
+  position: absolute;
+  left: -10000px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  left: -10000px;
+}
