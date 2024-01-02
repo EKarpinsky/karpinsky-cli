@@ -62,6 +62,10 @@ $terminalTextGreen: #00FF41;
   position: relative;
 }
 
+.focused {
+  outline: 1px solid var(--text);
+}
+
 .inputMirror {
   position: relative;
   flex-grow: 1;

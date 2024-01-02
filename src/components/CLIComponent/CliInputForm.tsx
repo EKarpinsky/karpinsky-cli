@@ -2,32 +2,27 @@ import { ForwardedRef, forwardRef, useCallback, useState } from 'react';
 import styles from '@/components/CLIComponent/CLIComponent.module.scss';
 import { useCommandProcessor } from '@/hooks/UseCommandProcessor';
 
+interface CliInputFormProps {
+  setHistory: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
 export const CliInputForm = forwardRef(
-  (
-    {
-      setHistory,
-    }: {
-      setHistory: React.Dispatch<React.SetStateAction<string[]>>;
-    },
-    ref: ForwardedRef<HTMLInputElement>,
-  ) => {
+  ({ setHistory }: CliInputFormProps, ref: ForwardedRef<HTMLInputElement>) => {
     const [input, setInput] = useState('');
+    const [isFocused, setIsFocused] = useState(false);
     const processCommand = useCommandProcessor();
 
     const handleSubmit = useCallback(
       (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const submittedInput = (ref as React.RefObject<HTMLInputElement>)
-          .current?.value;
-        if (!submittedInput) return;
-        const trimmedInput = submittedInput.trim();
+        const trimmedInput = input.trim();
         if (!trimmedInput) return;
         const output = processCommand(trimmedInput);
         setHistory((prev) => [...prev, trimmedInput, output]);
         setInput('');
-        (ref as React.RefObject<HTMLInputElement>).current?.focus();
+        if (ref && 'current' in ref) ref.current?.focus();
       },
-      [processCommand, ref, setHistory],
+      [input, processCommand, ref, setHistory],
     );
     return (
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -40,9 +35,16 @@ export const CliInputForm = forwardRef(
             value={input}
             className={styles.input}
             onChange={(e) => setInput(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
             aria-label="Type your command here and press Enter"
           />
-          <span className={styles.inputMirror} aria-hidden="true">
+          <span
+            className={`${styles.inputMirror} ${
+              isFocused ? styles.focused : ''
+            }`}
+            aria-hidden="true"
+          >
             {input}
           </span>
           <div className={styles.fakeCaret}></div>

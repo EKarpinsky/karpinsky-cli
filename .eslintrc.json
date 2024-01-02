@@ -16,11 +16,13 @@
     "import",
     "jsx-a11y",
     "sonarjs",
-    "react-hooks"
+    "react-hooks",
+    "prettier"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
-    "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
