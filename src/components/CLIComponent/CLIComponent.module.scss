@@ -20,7 +20,7 @@ $terminalTextGreen: #00FF41;
   border-radius: 5px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   border: 1px solid #333333; // Slight border for depth
-  overflow: auto;
+  overflow: hidden;
 }
 
 .cliHeading {
@@ -60,6 +60,7 @@ $terminalTextGreen: #00FF41;
   align-items: center;
   width: 100%;
   position: relative;
+  padding:5px;
 }
 
 .focused {

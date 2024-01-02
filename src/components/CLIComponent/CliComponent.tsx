@@ -1,14 +1,15 @@
 'use client';
 
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './CLIComponent.module.scss';
 import { CliHeader } from '@/components/CLIComponent/CliHeader';
 import { CliOutput } from '@/components/CLIComponent/CliOutput';
 import { CliInputForm } from '@/components/CLIComponent/CliInputForm';
 
 const CliComponent: FC = () => {
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<ReactNode[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -26,7 +27,11 @@ const CliComponent: FC = () => {
     <main>
       <div
         className={styles.container}
-        onClick={() => inputRef.current?.focus()}
+        onClick={() => {
+          console.log(isFocused);
+          inputRef.current?.focus();
+          setIsFocused(true);
+        }}
         aria-label="Karpinsky Command Line Interface"
         role="button"
         tabIndex={0}
@@ -37,8 +42,13 @@ const CliComponent: FC = () => {
           <h2
             className={styles.cliHeading}
           >{`Welcome to Karpinsky CLI. Type "help" and press Enter for a list of available commands.`}</h2>
-          <CliOutput strings={history} />
-          <CliInputForm setHistory={setHistory} ref={inputRef} />
+          <CliOutput outputLines={history} />
+          <CliInputForm
+            setHistory={setHistory}
+            ref={inputRef}
+            isFocused={isFocused}
+            setIsFocused={setIsFocused}
+          />
         </div>
       </div>
     </main>
